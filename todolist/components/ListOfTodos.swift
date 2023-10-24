@@ -28,8 +28,6 @@ struct ListOfTodos: View {
     }
 }
 
-
-
 struct Checkmark: View {
     @EnvironmentObject var c: ToDoController
     let todo : ToDoItem;
