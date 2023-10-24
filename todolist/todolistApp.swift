@@ -9,9 +9,13 @@ import SwiftUI
 
 @main
 struct todolistApp: App {
+    @StateObject var toDoController = ToDoController()
+
     var body: some Scene {
         WindowGroup {
             ContentView()
+                .environmentObject(toDoController)
+
         }
     }
 }

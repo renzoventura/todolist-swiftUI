@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct AddToDoButton: View {
-    @ObservedObject var toDoController : ToDoController
+    @EnvironmentObject var c: ToDoController
     @State private var isAlertPresented = false
     @State private var enteredText = ""
     
@@ -26,7 +26,7 @@ struct AddToDoButton: View {
             .alert("Add", isPresented: $isAlertPresented, actions: {
                 TextField("Buy Groceries...", text: $enteredText)
                 Button("Add", action: {
-                    toDoController.addNewTodo(text: enteredText)
+                    c.addNewTodo(text: enteredText)
                     enteredText = ""
                 })
                 Button("Cancel", role: .cancel, action: {

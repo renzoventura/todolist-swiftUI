@@ -9,21 +9,20 @@ import SwiftUI
 
 
 struct ContentView: View {
-    @ObservedObject var c = ToDoController()
     var body: some View {
         VStack {
             VStack(alignment: .leading) {
                 TitleView()
-                TodoCounter(toDoController: c)
+                TodoCounter()
                     .padding(.vertical, 18)
                     .padding(.horizontal, 8)
             }.padding()
-            ListOfTodos(c: c)
+            ListOfTodos()
                 .padding([.trailing], 20)
             Spacer()
             HStack {
                 Spacer()
-                AddToDoButton(toDoController: c)
+                AddToDoButton()
             }.padding([.trailing], 20)
         }
     }

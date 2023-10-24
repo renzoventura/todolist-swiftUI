@@ -8,19 +8,20 @@
 import SwiftUI
 
 struct ListOfTodos: View {
-    @ObservedObject var c : ToDoController
+    @EnvironmentObject var c: ToDoController
 
     var body: some View {
         List(c.listOfTodos) { todo in
             HStack {
                 HStack {
-                    Checkmark(toDoController: c, todo: todo)
+                    Checkmark(todo: todo)
                     Text(todo.text)
+                        .strikethrough(todo.isDone)
                     Spacer()
                 }.onTapGesture {
                     c.markTodoAsDone(id: todo.id)
                 }
-                DeleteButton(c: c, todo: todo)
+                DeleteButton(todo: todo)
             }
         }.scrollContentBackground(.hidden)
             .listStyle(PlainListStyle())
@@ -30,8 +31,7 @@ struct ListOfTodos: View {
 
 
 struct Checkmark: View {
-    @ObservedObject var toDoController : ToDoController
-
+    @EnvironmentObject var c: ToDoController
     let todo : ToDoItem;
     var body: some View {
         !todo.isDone ? Image(systemName: "circle").foregroundColor(.black) : Image(systemName: "checkmark.circle.fill").foregroundColor(.green)
@@ -39,7 +39,7 @@ struct Checkmark: View {
 }
 
 struct DeleteButton: View {
-    @ObservedObject var c : ToDoController
+    @EnvironmentObject var c: ToDoController
 
     let todo : ToDoItem;
     var body: some View {
